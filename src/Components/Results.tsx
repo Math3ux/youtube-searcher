@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+
 interface ResultsProps {
     term: string;
 }
+
 
 export const Results = ({ term }: ResultsProps) => {
     const [results, setResults] = useState<any[]>([]);
@@ -42,10 +44,10 @@ export const Results = ({ term }: ResultsProps) => {
     return (
         <div className='text-black'>
             {results.map((item) => (
-                <div key={item.id.videoId}>
-                    <h2>{item.snippet.title}</h2>
+                <div key={item.id.videoId} className="flex flex-col space-y-4 items-center block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h2 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>{item.snippet.title}</h2>
                     <img src={item.snippet.thumbnails.default.url} alt={item.snippet.title} />
-                    <p>https://www.youtube.com/watch?v=${item.id.videoId}</p>
+                    <p className='text-white'>https://www.youtube.com/watch?v={item.id.videoId}</p>
                 </div>
             ))}
         </div>
