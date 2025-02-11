@@ -42,11 +42,11 @@ export const Results = ({ term }: ResultsProps) => {
     if (loading) return <div>Carregando...</div>;
 
     return (
-        <div>
+        <div className='grid grid-cols-4 gap-4 p-4'>
             {results.map((item) => (
-                <div key={item.id.videoId} className="m-3 flex flex-col items-center bg-gray-800">
-                    <h2 className='mb-2 text-2xl font-bold tracking-tight text-white'>{item.snippet.title}</h2>
-                    <img src={item.snippet.thumbnails.default.url} alt={item.snippet.title} />
+                <div key={item.id.videoId} className="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+                    <h2 className='text-lg font-bold text-white line-clamp-2'>{item.snippet.title}</h2>
+                    <img src={item.snippet.thumbnails.default.url} alt={item.snippet.title} className="w-full h-48 object-cover"/>
                     <p className='text-white'>https://www.youtube.com/watch?v={item.id.videoId}</p>
                 </div>
             ))}
