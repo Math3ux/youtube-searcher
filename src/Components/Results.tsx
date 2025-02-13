@@ -41,13 +41,21 @@ export const Results = ({ term }: ResultsProps) => {
 
     if (loading) return <div>Carregando...</div>;
 
+    const copyText = (link: string) => {
+        navigator.clipboard.writeText(link).then(() => {
+            alert('Link copiado para a área de transferência!')
+        }).catch((error) => {
+            console.error('Erro ao copiar o link:', error);
+        })
+    }
+
     return (
         <div className='grid grid-cols-4 gap-4 p-4'>
             {results.map((item) => (
                 <div key={item.id.videoId} className="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
                     <h2 className='text-lg font-bold text-white line-clamp-2'>{item.snippet.title}</h2>
                     <img src={item.snippet.thumbnails.default.url} alt={item.snippet.title} className="w-full h-48 object-cover"/>
-                    <p className='text-white'>https://www.youtube.com/watch?v={item.id.videoId}</p>
+                    <button className='w-full p-4 bg-gray-800 text-white' onClick={() => copyText(`https://www.youtube.com/watch?v=${item.id.videoId}`)}>Copiar Link</button>
                 </div>
             ))}
         </div>
