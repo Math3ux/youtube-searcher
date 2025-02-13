@@ -52,9 +52,9 @@ export const Results = ({ term }: ResultsProps) => {
     return (
         <div className='grid grid-cols-4 gap-4 p-4'>
             {results.map((item) => (
-                <div key={item.id.videoId} className="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-                    <h2 className='text-lg font-bold text-white line-clamp-2'>{item.snippet.title}</h2>
-                    <img src={item.snippet.thumbnails.default.url} alt={item.snippet.title} className="w-full h-48 object-cover"/>
+                <div key={item.id.videoId} className="flex flex-col items-center bg-gray-900 p-4 rounded-lg">
+                    <h2 className='text-lg font-bold text-white line-clamp-2 h-16'>{item.snippet.title}</h2>
+                    <img src={item.snippet.thumbnails.default.url} alt={item.snippet.title} className="w-full h-48 object-cover mb-4"/>
                     <button className='w-full p-4 bg-gray-800 text-white' onClick={() => copyText(`https://www.youtube.com/watch?v=${item.id.videoId}`)}>Copiar Link</button>
                 </div>
             ))}
