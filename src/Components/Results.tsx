@@ -10,6 +10,7 @@ interface ResultsProps {
 export const Results = ({ term }: ResultsProps) => {
     const [results, setResults] = useState<any[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const [firstSearch, setFirstSearch] = useState<boolean>(false);
 
     let apiKey = import.meta.env.VITE_YOUTUBE_API_KEY
 
@@ -30,6 +31,7 @@ export const Results = ({ term }: ResultsProps) => {
             } catch (error) {
                 console.error('Erro ao buscar resultados:', error);
             } finally {
+                setFirstSearch(true);
                 setLoading(false);
             }
         };
@@ -39,7 +41,12 @@ export const Results = ({ term }: ResultsProps) => {
         }
     }, [term]);
 
-    if (loading) return <div>Carregando...</div>;
+    if (!term && !firstSearch) return <div className='flex justify-center items-center text-black'>Digite algo para pesquisar</div>;
+
+    if (loading) return <div className='text-black'>Carregando...</div>;
+
+    if (results.length === 0) return <div className='flex justify-center items-center text-black text-2xl'>Nenhum resultado encontrado</div>;
+
 
     const copyText = (link: string) => {
         navigator.clipboard.writeText(link).then(() => {
